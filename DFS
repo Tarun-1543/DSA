@@ -1,0 +1,29 @@
+void dfsHelper(vector<vector<char>>& grid, int row, int col, vector<vector<bool>>&visited) {
+        int n = grid.size();
+        int m = grid[0].size();
+        visited[row][col]=true;
+        int dx[] = {-1, 0, 1, 0};
+        int dy[] = {0, -1, 0, 1};
+        for(int i=0;i<4;i++) {
+            int r = row +dx[i];
+            int c = col + dy[i];
+            if(r>=0 && r<n && c>=0 && c<m && grid[r][c]=='1' && !visited[r][c]) {
+                dfs(grid, r, c, visited);
+            }
+        }
+    }
+    int dfs(vector<vector<char>>& grid) {
+        int n = grid.size();
+        int m = grid[0].size();
+        vector<vector<bool>>visited(n, vector<bool>(m, false));
+        int count =0;
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<m;j++) {
+                if(grid[i][j]=='1' && !visited[i][j]) {
+                    dfs(grid, i, j, visited);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
